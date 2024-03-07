@@ -1,0 +1,103 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    flex-direction: row-reverse;
+    align-items: center;
+    background-color: var(--blue-color);
+    padding: 0 30px;
+    position: relative;
+    border-bottom: 2px solid var(--white-color);
+    z-index: 99;
+    height: 55px;
+    flex-wrap: wrap;
+}
+
+.header .links a {
+    color: #fff;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.header .authBtn {
+    background-color: var(--white-color);
+    ;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.header .authBtn {
+    margin-left: 5px;
+}
+
+.header i {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.header strong {
+    font-size: 25px;
+    width: 75px;
+    display: inline-block;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.header strong::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    background-color: var(--white-color);
+    left: 0;
+    display: block;
+    height: 3px;
+    width: 75px;
+}
+
+.header .toggleDiv {
+    display: none;
+}
+
+.header .logo i.bi-list,
+.header .logo i.bi-x {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.header .logo i.bi-pencil {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 992px) {
+    .logo {
+        margin-top: -7px;
+    }
+
+    .links {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        background-color: var(--blue-color);
+        transition: all 0.7s ease-in-out;
+        left: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    .links a {
+        display: block;
+        padding-left: 30px;
+        padding-bottom: 10px;
+    }
+
+    .header .toggleDiv {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        padding: 0 10px;
+    }
+}
