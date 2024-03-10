@@ -3,6 +3,8 @@ import "./postDetails.css";
 import { posts } from "../../../dummyData";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import AddComment from "../../../components/comments/AddComment";
+import CommentList from "../../../components/comments/CommentList";
 const PostDetails = () => {
   const { id } = useParams();
   const post = posts.find((p) => p._id === parseInt(id || ""));
@@ -83,6 +85,8 @@ const PostDetails = () => {
           <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
         </div>
       </div>
+      <AddComment />
+      <CommentList />
     </div>
   );
 };
