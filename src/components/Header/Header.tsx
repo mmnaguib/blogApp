@@ -32,7 +32,7 @@ const Header = () => {
           <i className="bi bi-stickies"></i>Posts
         </NavLink>
         <NavLink to="/post/create" onClick={() => setOpen(false)}>
-          <i className="bi bi-stickies"></i>Posts
+          <i className="bi bi-journal-plus"></i>Create
         </NavLink>
         <NavLink to="/admin" onClick={() => setOpen(false)}>
           <i className="bi bi-person-check"></i>Admin Dashboard

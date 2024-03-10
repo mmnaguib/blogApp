@@ -5,8 +5,12 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/forms/Login";
 import Register from "./pages/forms/Register";
 import Posts from "./pages/posts/Posts";
-import CreatePost from "./pages/posts/CreatePost";
 import Admin from "./pages/Admin/Admin";
+import Footer from "./components/footer/Footer";
+import CreatePost from "./pages/posts/create-post/CreatePost";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +23,8 @@ function App() {
         <Route path="/post/create" element={<CreatePost />} />
         <Route path="/admin-dashboard" element={<Admin />} />
       </Routes>
+      <Footer />
+      <ToastContainer theme="colored" position="top-center" />
     </BrowserRouter>
   );
 }
