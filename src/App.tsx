@@ -10,6 +10,7 @@ import Footer from "./components/footer/Footer";
 import CreatePost from "./pages/posts/create-post/CreatePost";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import PostDetails from "./pages/posts/post-details/PostDetails";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/posts" element={<Posts />} />
         <Route path="/post/create" element={<CreatePost />} />
         <Route path="/admin-dashboard" element={<Admin />} />
+        <Route path="/post/details/:id" element={<PostDetails />} />
       </Routes>
       <Footer />
       <ToastContainer theme="colored" position="top-center" />
