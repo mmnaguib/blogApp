@@ -1,11 +1,11 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import Home from "./pages/home/Home";
 import Login from "./pages/forms/Login";
 import Register from "./pages/forms/Register";
 import Posts from "./pages/posts/Posts";
-import Admin from "./pages/Admin/Admin";
+import Admin from "./pages/admin/Admin";
 import Footer from "./components/footer/Footer";
 import CreatePost from "./pages/posts/create-post/CreatePost";
 import "react-toastify/dist/ReactToastify.css";

@@ -1,5 +1,4 @@
 import "./upadatePostModel.css";
-import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 import { postInterface } from "../../redux/type";
 interface Props {
@@ -19,7 +18,6 @@ const UpdatePostModal = ({ setUpdatePost, post }: Props) => {
 
   return (
     <div className="update-post">
-      <ToastContainer theme="colored" />
       <form onSubmit={formSubmitHandler} className="update-post-form">
         <abbr title="close">
           <i

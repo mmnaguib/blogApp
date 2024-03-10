@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./commentList.css";
 // import UpdateCommentModal from "./UpdateCommentModal";
 import swal from "sweetalert";
+import UpdateCommentModal from "./CommentUpdateModal";
 
 const CommentList = () => {
   const [updateComment, setUpdateComment] = useState<boolean>(false);
@@ -51,9 +52,9 @@ const CommentList = () => {
           </div>
         </div>
       ))}
-      {/* {updateComment && (
+      {updateComment && (
         <UpdateCommentModal setUpdateComment={setUpdateComment} />
-      )} */}
+      )}
     </div>
   );
 };
