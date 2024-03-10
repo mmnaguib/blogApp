@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AddComment from "../../../components/comments/AddComment";
 import CommentList from "../../../components/comments/CommentList";
+import UpdatePostModal from "../UpadatePostModel";
 const PostDetails = () => {
   const { id } = useParams();
   const post = posts.find((p) => p._id === parseInt(id || ""));
@@ -79,7 +80,7 @@ const PostDetails = () => {
         </div>
         <div>
           <i
-            // onClick={() => setUpdatePost(true)}
+            onClick={() => setUpdatePost(true)}
             className="bi bi-pencil-square"
           ></i>
           <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
@@ -87,6 +88,9 @@ const PostDetails = () => {
       </div>
       <AddComment />
       <CommentList />
+      {updatePost && (
+        <UpdatePostModal post={post} setUpdatePost={setUpdatePost} />
+      )}
     </div>
   );
 };
