@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 const Header = () => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -9,14 +10,14 @@ const Header = () => {
   return (
     <div className="header">
       <div className="authButtons">
-        <a className="authBtn btn-sm" href="/register">
+        <NavLink className="authBtn btn-sm" to="/register">
           <i className="bi bi-person-plus"></i>
           Register
-        </a>
-        <a className="authBtn btn-sm" href="/login">
+        </NavLink>
+        <NavLink className="authBtn btn-sm" to="/login">
           <i className="bi bi-box-arrow-in-right"></i>
           Login
-        </a>
+        </NavLink>
       </div>
       <div
         style={{
@@ -24,15 +25,18 @@ const Header = () => {
         }}
         className="links"
       >
-        <a href="#home" onClick={() => setOpen(false)}>
+        <NavLink to="/" onClick={() => setOpen(false)}>
           <i className="bi bi-house"></i>Home
-        </a>
-        <a href="#posts" onClick={() => setOpen(false)}>
+        </NavLink>
+        <NavLink to="/posts" onClick={() => setOpen(false)}>
           <i className="bi bi-stickies"></i>Posts
-        </a>
-        <a href="#admin" onClick={() => setOpen(false)}>
+        </NavLink>
+        <NavLink to="/post/create" onClick={() => setOpen(false)}>
+          <i className="bi bi-stickies"></i>Posts
+        </NavLink>
+        <NavLink to="/admin" onClick={() => setOpen(false)}>
           <i className="bi bi-person-check"></i>Admin Dashboard
-        </a>
+        </NavLink>
       </div>
       <div className="logo">
         <div className="toggleDiv" onClick={() => toggleNavbar()}>
