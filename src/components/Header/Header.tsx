@@ -34,7 +34,7 @@ const Header = () => {
         <NavLink to="/post/create" onClick={() => setOpen(false)}>
           <i className="bi bi-journal-plus"></i>Create
         </NavLink>
-        <NavLink to="/admin" onClick={() => setOpen(false)}>
+        <NavLink to="/admin-dashboard" onClick={() => setOpen(false)}>
           <i className="bi bi-person-check"></i>Admin Dashboard
         </NavLink>
       </div>

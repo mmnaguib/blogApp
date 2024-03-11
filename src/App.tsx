@@ -12,6 +12,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import PostDetails from "./pages/posts/post-details/PostDetails";
 import Category from "./pages/category/Category";
+import Profile from "./pages/profile/Profile";
+import UsersTable from "./pages/admin/UsersTable";
+import CategoriesTable from "./pages/admin/CategoriesTable";
+import PostsTable from "./pages/admin/PostsTable";
+import CommentsTable from "./pages/admin/CommentsTable";
 
 function App() {
   return (
@@ -21,14 +26,21 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/posts" element={<Posts />} />
         <Route path="post">
           <Route path="create" element={<CreatePost />} />
           <Route path="details/:id" element={<PostDetails />} />
           <Route path="category/:category" element={<Category />} />
         </Route>
-        <Route path="/admin-dashboard" element={<Admin />} />
+        <Route path="profile/:id" element={<Profile />} />
+
+        <Route path="/admin-dashboard">
+          <Route index element={<Admin />} />
+          <Route path="users-table" element={<UsersTable />} />
+          <Route path="categories-table" element={<CategoriesTable />} />
+          <Route path="posts-table" element={<PostsTable />} />
+          <Route path="comments-table" element={<CommentsTable />} />
+        </Route>
       </Routes>
       <Footer />
       <ToastContainer theme="colored" position="top-center" />
