@@ -11,6 +11,7 @@ import CreatePost from "./pages/posts/create-post/CreatePost";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import PostDetails from "./pages/posts/post-details/PostDetails";
+import Category from "./pages/category/Category";
 
 function App() {
   return (
@@ -20,10 +21,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route path="/posts" element={<Posts />} />
-        <Route path="/post/create" element={<CreatePost />} />
+        <Route path="post">
+          <Route path="create" element={<CreatePost />} />
+          <Route path="details/:id" element={<PostDetails />} />
+          <Route path="category/:category" element={<Category />} />
+        </Route>
         <Route path="/admin-dashboard" element={<Admin />} />
-        <Route path="/post/details/:id" element={<PostDetails />} />
       </Routes>
       <Footer />
       <ToastContainer theme="colored" position="top-center" />

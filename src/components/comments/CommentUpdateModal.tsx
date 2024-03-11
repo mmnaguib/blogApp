@@ -1,22 +1,23 @@
+import { toast } from "react-toastify";
 import "./commentUpdateModal.css";
-import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 export interface Props {
-    setUpdateComment: (value: React.SetStateAction<boolean>) => void;
+  setUpdateComment: (value: React.SetStateAction<boolean>) => void;
 }
 const UpdateCommentModal = ({ setUpdateComment }: Props) => {
-  const [text, setText] = useState("this is so great");
+  const [text, setText] = useState<string>("this is so great");
 
   // From Submit Handler
-  const formSubmitHandler = (e: { preventDefault: () => void; }) => {
+  const formSubmitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
-    console.log({text});
+    if (text.trim() === "") {
+      return toast.error("Please enter a valid Comment!");
+    }
+    console.log({ text });
   };
 
   return (
     <div className="update-comment">
-      <ToastContainer theme="colored" />
       <form onSubmit={formSubmitHandler} className="update-comment-form">
         <abbr title="close">
           <i

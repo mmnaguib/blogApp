@@ -1,18 +1,29 @@
 import "./upadatePostModel.css";
 import { useState } from "react";
 import { postInterface } from "../../redux/type";
+import { toast } from "react-toastify";
 interface Props {
   post: postInterface | undefined;
   setUpdatePost: (value: React.SetStateAction<boolean>) => void;
 }
 const UpdatePostModal = ({ setUpdatePost, post }: Props) => {
-  const [title, setTitle] = useState(post?.title);
-  const [description, setDescription] = useState(post?.description);
-  const [category, setCategory] = useState(post?.category);
+  const [title, setTitle] = useState<string>(post?.title || "");
+  const [description, setDescription] = useState<string>(
+    post?.description || ""
+  );
+  const [category, setCategory] = useState<string>(post?.category || "");
   // From Submit Handler
   const formSubmitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+    if (title.trim() === "") {
+      return toast.error("Please enter a valid title!");
+    }
+    if (category.trim() === "") {
+      return toast.error("Please enter a valid Category!");
+    }
+    if (description.trim() === "") {
+      return toast.error("Please enter a valid Description!");
+    }
     console.log({ title, description, category });
   };
 
