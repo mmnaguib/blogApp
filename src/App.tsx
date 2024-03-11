@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/forms/Login";
 import Register from "./pages/forms/Register";
@@ -19,6 +19,7 @@ import PostsTable from "./pages/admin/PostsTable";
 import CommentsTable from "./pages/admin/CommentsTable";
 import ForgotPassword from "./pages/forms/ForgotPassword";
 import ResetPassword from "./pages/forms/ResetPassword";
+import NotFound from "./pages/not-found/NotFound";
 
 function App() {
   return (
@@ -48,8 +49,8 @@ function App() {
           <Route path="posts-table" element={<PostsTable />} />
           <Route path="comments-table" element={<CommentsTable />} />
         </Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
-
       <Footer />
       <ToastContainer theme="colored" position="top-center" />
     </BrowserRouter>
