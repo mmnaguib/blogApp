@@ -6,7 +6,6 @@ import { useState } from "react";
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
   // From Submit Handler
   const formSubmitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -15,7 +14,6 @@ const Login = () => {
 
     console.log({ email, password });
   };
-
   return (
     <section className="form-container">
       <h1 className="form-title">Login to your account</h1>
