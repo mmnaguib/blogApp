@@ -1,19 +1,34 @@
+import { toast } from "react-toastify";
 import { authActions } from "../slices/AuthSlice";
+import request from "../../util/request";
 
+export function registerUser(user) {
+  return async (dispatch) => {
+    try {
+      const { data } = await request.post("/api/auth/register", user);
+      dispatch(authActions.register(data.Message));
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error) {
+      toast.error(error.response.data.Message);
+    }
+  };
+}
 export function loginUser(user) {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
-
-      const data = await response.json();
+      const { data } = await request.post("/api/auth/login", user);
       dispatch(authActions.login(data));
       localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      toast.error(error.response.data.Message);
+      console.log(error.response.data.Message);
     }
+  };
+}
+
+export function logout() {
+  return async (dispatch) => {
+    dispatch(authActions.logout());
+    localStorage.removeItem("userInfo");
   };
 }

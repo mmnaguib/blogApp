@@ -14,6 +14,8 @@ const Login = () => {
     if (email.trim() === "") return toast.error("Email is required");
     if (password.trim() === "") return toast.error("Password is required");
     dispatch(loginUser({ email, password }));
+    setEmail("");
+    setPassword("");
   };
   return (
     <section className="form-container">

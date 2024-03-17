@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./Header.css";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/apiCalls/AuthCall";
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleNavbar = () => {
     setOpen(!open);
@@ -13,42 +15,54 @@ const Header = () => {
   const toggleDropDown = () => {
     setDropdown(!dropdown);
   };
+  const logOutHandler = (e) => {
+    setDropdown(false);
+    dispatch(logout());
+  };
   return (
     <div className="header">
       {user ? (
-        <div className="header-username">
-          <span onClick={() => toggleDropDown()}>{user.username}</span>
-          <img src={user.profile_photo.url} alt="" className="avatarHeader" />
-          {dropdown ? (
-            <div className="user-dropdown">
-              <Link
-                to={`/profile/${user._id}`}
-                className="dropdownItem"
-                onClick={() => setDropdown(false)}
-              >
-                <i className="bi bi-file-person"></i>
-                <span>Profile</span>
-              </Link>
-              <div className="dropdownItem">
-                <i className="bi bi-box-arrow-in-left"></i>
-                <span>Logout</span>
+        <>
+          <div className="header-username">
+            <span onClick={() => toggleDropDown()}>{user?.username}</span>
+            <img
+              src={user?.profile_photo?.url}
+              alt=""
+              className="avatarHeader"
+            />
+            {dropdown ? (
+              <div className="user-dropdown">
+                <Link
+                  to={`/profile/${user?._id}`}
+                  className="dropdownItem"
+                  onClick={() => setDropdown(false)}
+                >
+                  <i className="bi bi-file-person"></i>
+                  <span>Profile</span>
+                </Link>
+                <div className="dropdownItem" onClick={() => logOutHandler()}>
+                  <i className="bi bi-box-arrow-in-left"></i>
+                  <span>Logout</span>
+                </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </>
       ) : (
-        <div className="authButtons">
-          <NavLink className="authBtn btn-sm" to="/register">
-            <i className="bi bi-person-plus"></i>
-            Register
-          </NavLink>
-          <NavLink className="authBtn btn-sm" to="/login">
-            <i className="bi bi-box-arrow-in-right"></i>
-            Login
-          </NavLink>
-        </div>
+        <>
+          <div className="authButtons">
+            <NavLink className="authBtn btn-sm" to="/register">
+              <i className="bi bi-person-plus"></i>
+              Register
+            </NavLink>
+            <NavLink className="authBtn btn-sm" to="/login">
+              <i className="bi bi-box-arrow-in-right"></i>
+              Login
+            </NavLink>
+          </div>
+        </>
       )}
       <div
         style={{
@@ -62,12 +76,16 @@ const Header = () => {
         <NavLink to="/posts" onClick={() => setOpen(false)}>
           <i className="bi bi-stickies"></i>Posts
         </NavLink>
-        <NavLink to="/post/create" onClick={() => setOpen(false)}>
-          <i className="bi bi-journal-plus"></i>Create
-        </NavLink>
-        <NavLink to="/admin-dashboard" onClick={() => setOpen(false)}>
-          <i className="bi bi-person-check"></i>Admin Dashboard
-        </NavLink>
+        {user && (
+          <NavLink to="/post/create" onClick={() => setOpen(false)}>
+            <i className="bi bi-journal-plus"></i>Create
+          </NavLink>
+        )}
+        {user?.isAdmin && (
+          <NavLink to="/admin-dashboard" onClick={() => setOpen(false)}>
+            <i className="bi bi-person-check"></i>Admin Dashboard
+          </NavLink>
+        )}
       </div>
       <div className="logo">
         <div className="toggleDiv" onClick={() => toggleNavbar()}>
