@@ -1,11 +1,7 @@
 import React from "react";
 import PostItem from "./PostItem";
-import { postInterface } from "../../redux/type";
 
-interface Props {
-  posts: postInterface[];
-}
-const PostIList = ({ posts }: Props) => {
+const PostIList = ({ posts }) => {
   return (
     <div className="post-list">
       {posts.map((item) => (

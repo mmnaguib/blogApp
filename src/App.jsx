@@ -11,7 +11,7 @@ import CreatePost from "./pages/posts/create-post/CreatePost";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import PostDetails from "./pages/posts/post-details/PostDetails";
-import Category from "./pages/category/Category";
+import Category from "./pages/category/Category.jsx";
 import Profile from "./pages/profile/Profile";
 import UsersTable from "./pages/admin/UsersTable";
 import CategoriesTable from "./pages/admin/CategoriesTable";

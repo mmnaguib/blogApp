@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./create-post.css";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewPost } from "../../../redux/apiCalls/PostCall";
+import { useNavigate } from "react-router-dom";
+import { fetchCategories } from "../../../redux/apiCalls/CategoryCall";
+import { ClipLoader } from "react-spinners";
 
 const CreatePost = () => {
-  const [title, setTitle] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [file, setFile] = useState<File | null | undefined>(null);
-
-  const formHandler = (e: { preventDefault: () => void }) => {
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const { loading, isPostCreated } = useSelector((state) => state.post);
+  const { categories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  const formHandler = (e) => {
     e.preventDefault();
     if (title.trim() === "") {
       return toast.error("Please enter a valid title!");
@@ -28,8 +39,14 @@ const CreatePost = () => {
     formData.append("category", category);
     formData.append("description", description);
     // API call here
-    console.log(formData);
+    dispatch(createNewPost(formData));
   };
+  useEffect(() => {
+    if (isPostCreated) {
+      navigate("/");
+    }
+  }, [isPostCreated, navigate]);
+
   return (
     <section className="create-post-section">
       <h1 className="createPost-title">Create New Post</h1>
@@ -51,8 +68,9 @@ const CreatePost = () => {
           <option disabled value="">
             Select Category
           </option>
-          <option>music</option>
-          <option>coffee</option>
+          {categories.map((category) => (
+            <option>{category.title}</option>
+          ))}
         </select>
         <textarea
           className="create-post-textarea"
@@ -70,7 +88,7 @@ const CreatePost = () => {
           required
         />
         <button type="submit" className="create-post-btn">
-          Create
+          {loading ? <ClipLoader color="#fff" /> : "Create"}
         </button>
       </form>
     </section>

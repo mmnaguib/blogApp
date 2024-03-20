@@ -1,11 +1,21 @@
 import PostIList from "../../components/posts/PostIList";
 import "./home.css";
-import { posts } from "../../dummyData";
-import { categories } from "../../dummyData";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchPosts } from "../../redux/apiCalls/PostCall";
+import { fetchCategories } from "../../redux/apiCalls/CategoryCall";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.post);
+  const { categories } = useSelector((state) => state.category);
+  useEffect(() => {
+    dispatch(fetchPosts(1));
+    dispatch(fetchCategories());
+    window.scroll(0, 0);
+  }, [dispatch]);
   return (
     <section className="homeContent">
       <div className="home">
@@ -13,7 +23,7 @@ const Home = () => {
       </div>
       <div className="home-latest-posts">Latest Posts</div>
       <div className="home-container">
-        <PostIList posts={posts.slice(0, 3)} />
+        <PostIList posts={posts} />
         <Sidebar categories={categories} />
       </div>
       <div className="all-posts">

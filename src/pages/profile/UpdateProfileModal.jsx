@@ -1,31 +1,23 @@
+import { useDispatch } from "react-redux";
 import "./updateProfileModal.css";
 import { useState } from "react";
+import { updateProfile } from "../../redux/apiCalls/ProfileCall";
 
-const user = {
-  username: "Youssef",
-  bio: "hello my name is youssef",
-  password: "",
-};
+const UpdateProfileModal = ({ setUpdateProfile, profile }) => {
+  const [username, setUsername] = useState(profile.username);
+  const [bio, setBio] = useState(profile.bio);
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-export interface Props {
-  setUpdateProfile: (value: React.SetStateAction<boolean>) => void;
-}
-
-const UpdateProfileModal = ({ setUpdateProfile }: Props) => {
-  const [username, setUsername] = useState<string>(user.username || "");
-  const [bio, setBio] = useState<string>(user.bio || "");
-  const [password, setPassword] = useState<string>("");
-
-  // From Submit Handler
-  const formSubmitHandler = (e: { preventDefault: () => void }) => {
+  const formSubmitHandler = (e) => {
     e.preventDefault();
 
     const updatedUser = { username, bio, password };
     if (password.trim() !== "") {
       updatedUser.password = password;
     }
-
-    console.log(updatedUser);
+    dispatch(updateProfile(profile._id, updatedUser));
+    setUpdateProfile(false);
   };
 
   return (

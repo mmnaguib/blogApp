@@ -1,11 +1,7 @@
 import "./sidebar.css";
-import { categoryInterface } from "../../redux/type";
 import { Link } from "react-router-dom";
 
-interface Props {
-  categories: categoryInterface[];
-}
-const Sidebar = ({ categories }: Props) => {
+const Sidebar = ({ categories }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-title">categories</div>

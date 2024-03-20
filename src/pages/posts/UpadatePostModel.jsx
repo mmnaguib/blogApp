@@ -1,19 +1,20 @@
 import "./upadatePostModel.css";
-import { useState } from "react";
-import { postInterface } from "../../redux/type";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-interface Props {
-  post: postInterface | undefined;
-  setUpdatePost: (value: React.SetStateAction<boolean>) => void;
-}
-const UpdatePostModal = ({ setUpdatePost, post }: Props) => {
-  const [title, setTitle] = useState<string>(post?.title || "");
-  const [description, setDescription] = useState<string>(
-    post?.description || ""
-  );
-  const [category, setCategory] = useState<string>(post?.category || "");
+import { fetchCategories } from "../../redux/apiCalls/CategoryCall";
+
+const UpdatePostModal = ({ setUpdatePost, post }) => {
+  const [title, setTitle] = useState(post?.title);
+  const [description, setDescription] = useState(post?.description);
+  const [category, setCategory] = useState(post?.category);
+  const { categories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
   // From Submit Handler
-  const formSubmitHandler = (e: { preventDefault: () => void }) => {
+  const formSubmitHandler = (e) => {
     e.preventDefault();
     if (title.trim() === "") {
       return toast.error("Please enter a valid title!");
@@ -51,9 +52,9 @@ const UpdatePostModal = ({ setUpdatePost, post }: Props) => {
           <option disabled value="">
             Select A Category
           </option>
-          <option value="music">music</option>
-          <option value="travelling">travelling</option>
-          <option value="drinks">drinks</option>
+          {categories.map((category) => (
+            <option>{category.title}</option>
+          ))}
         </select>
         <textarea
           className="update-post-textarea"

@@ -1,14 +1,12 @@
 import { toast } from "react-toastify";
 import "./commentUpdateModal.css";
 import { useState } from "react";
-export interface Props {
-  setUpdateComment: (value: React.SetStateAction<boolean>) => void;
-}
-const UpdateCommentModal = ({ setUpdateComment }: Props) => {
-  const [text, setText] = useState<string>("this is so great");
+
+const UpdateCommentModal = ({ setUpdateComment, comment }) => {
+  const [text, setText] = useState(comment?.text);
 
   // From Submit Handler
-  const formSubmitHandler = (e: { preventDefault: () => void }) => {
+  const formSubmitHandler = (e) => {
     e.preventDefault();
     if (text.trim() === "") {
       return toast.error("Please enter a valid Comment!");
