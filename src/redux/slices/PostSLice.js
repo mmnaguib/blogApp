@@ -36,14 +36,27 @@ const PostSlice = createSlice({
     setPost(state, action) {
       state.post = action.payload;
     },
-    uploadPostImage(state, action) {
-      state.post.image = action.payload;
-    },
     uploadPost(state, action) {
       state.post = action.payload;
     },
+    deletePost(state, action) {
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
+    },
     setLike(state, action) {
       state.post.likes = action.payload.likes;
+    },
+    addCommentToPost(state, action) {
+      state.post.comments.push(action.payload);
+    },
+    updateComment(state, action) {
+      state.post.comments = state.post.comments.map((comment) =>
+        comment._id === action.payload._id ? action.payload : comment
+      );
+    },
+    deleteCommentFromPost(state, action) {
+      state.post.comments = state.post.comments.filter(
+        (comment) => comment._id !== action.payload
+      );
     },
   },
 });

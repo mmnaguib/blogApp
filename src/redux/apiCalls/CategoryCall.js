@@ -12,3 +12,34 @@ export function fetchCategories() {
     }
   };
 }
+
+export function addCategory(newCategory) {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await request.post(`/api/categories/`, newCategory, {
+        headers: {
+          token: "Bearer " + getState().auth.user.token,
+        },
+      });
+      dispatch(CategoryActions.addCategory(data));
+      toast.success("category Added Successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+}
+export function deleteCategory(catId) {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await request.delete(`/api/categories/${catId}`, {
+        headers: {
+          token: "Bearer " + getState().auth.user.token,
+        },
+      });
+      dispatch(CategoryActions.deleteCategory(data.catId));
+      toast.success(data?.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+}

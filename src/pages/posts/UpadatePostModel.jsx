@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { fetchCategories } from "../../redux/apiCalls/CategoryCall";
+import { updatePost } from "../../redux/apiCalls/PostCall";
 
 const UpdatePostModal = ({ setUpdatePost, post }) => {
   const [title, setTitle] = useState(post?.title);
@@ -25,7 +26,8 @@ const UpdatePostModal = ({ setUpdatePost, post }) => {
     if (description.trim() === "") {
       return toast.error("Please enter a valid Description!");
     }
-    console.log({ title, description, category });
+    dispatch(updatePost(post?.id, { title, description, category }));
+    setUpdatePost(false);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./postDetails.css";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -9,8 +9,11 @@ import UpdatePostModal from "../UpadatePostModel";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ToggleLikeBtn,
+  deletePost,
   fetchSinglePost,
+  uploadPostImage,
 } from "../../../redux/apiCalls/PostCall";
+import swal from "sweetalert";
 const PostDetails = () => {
   const dispatch = useDispatch();
   const { post } = useSelector((state) => state.post);
@@ -18,6 +21,7 @@ const PostDetails = () => {
   const { id } = useParams();
   const [updatePost, setUpdatePost] = useState(false);
   const [file, setFile] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchSinglePost(id));
@@ -26,10 +30,27 @@ const PostDetails = () => {
   const updateImageSubmitHandler = (e) => {
     e.preventDefault();
     if (!file) return toast.warning("there is no file!");
-
-    console.log("image uploaded successfully");
+    const formData = new FormData();
+    formData.append("image", file);
+    dispatch(uploadPostImage(post?._id, formData));
+    toast.success("Post Image Updated");
   };
-  const deletePostHandler = () => {};
+  const deletePostHandler = () => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Post!",
+      icon: "warning",
+      buttons: [true, "Delete"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(deletePost(post?._id));
+        navigate(`/profile/${user?._id}`);
+      } else {
+        swal("Something went wrong!");
+      }
+    });
+  };
   return (
     <div className="post-details-section">
       <div className="post-details-image-wrapper">
@@ -102,7 +123,7 @@ const PostDetails = () => {
         </div>
       )}
       {user ? (
-        <AddComment />
+        <AddComment postId={post?._id} />
       ) : (
         <div className="alert alert-danger">Can't Comment Without Login</div>
       )}

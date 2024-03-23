@@ -130,3 +130,11 @@
         text-align: center;
     }
 }
+
+.profile-loader {
+    height: calc(100vh - 130px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}

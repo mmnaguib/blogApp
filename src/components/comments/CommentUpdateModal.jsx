@@ -1,17 +1,21 @@
 import { toast } from "react-toastify";
 import "./commentUpdateModal.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateComment } from "../../redux/apiCalls/CommentCall";
 
-const UpdateCommentModal = ({ setUpdateComment, comment }) => {
-  const [text, setText] = useState(comment?.text);
-
+const UpdateCommentModal = ({ setUpdateComment, commentForUpdate }) => {
+  const [text, setText] = useState(commentForUpdate?.text);
+  const dispatch = useDispatch();
   // From Submit Handler
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if (text.trim() === "") {
       return toast.error("Please enter a valid Comment!");
     }
-    console.log({ text });
+
+    dispatch(updateComment(commentForUpdate._id, { text }));
+    setUpdateComment(false);
   };
 
   return (

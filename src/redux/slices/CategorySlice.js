@@ -9,6 +9,14 @@ const CategorySlice = createSlice({
     fetchCategories(state, action) {
       state.categories = action.payload;
     },
+    addCategory(state, action) {
+      state.categories.push(action.payload);
+    },
+    deleteCategory(state, action) {
+      state.categories = state.categories.filter(
+        (cat) => cat._id !== action.payload
+      );
+    },
   },
 });
 
