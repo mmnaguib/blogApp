@@ -56,11 +56,11 @@ const PostDetails = () => {
       <div className="post-details-image-wrapper">
         {/* <img src={post?.image} alt="" className="post-detail-image" /> */}
         <img
-          src={file ? URL.createObjectURL(file) : post?.image.url}
+          src={file ? URL.createObjectURL(file) : post?.image?.url}
           alt=""
           className="post-detail-image"
         />
-        {post?.user._id === user?._id && (
+        {post?.user?._id === user?._id && (
           <form
             onSubmit={updateImageSubmitHandler}
             className="update-post-image-form"
@@ -83,7 +83,7 @@ const PostDetails = () => {
       <h1 className="post-details-title">{post?.title}</h1>
       <div className="post-details-user-info">
         <img
-          src={post?.user.profile_photo.url}
+          src={post?.user.profile_photo?.url}
           alt=""
           className="post-details-user-image"
         />

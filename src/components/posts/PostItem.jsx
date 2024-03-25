@@ -4,7 +4,7 @@ import "./posts.css";
 const PostItem = ({ post, username, userId }) => {
   const profileLink = userId
     ? `/profile/${userId}`
-    : `/profile/${post?.user._id}`;
+    : `/profile/${post?.user?._id}`;
   return (
     <div className="post-item">
       <div className="image-wrapper">
@@ -15,7 +15,7 @@ const PostItem = ({ post, username, userId }) => {
           <div className="author-info">
             <strong>Author: </strong>
             <Link to={profileLink} className="post-item-author">
-              {username ? username : post?.user.username}
+              {username ? username : post?.user?.username}
             </Link>
           </div>
           <div className="date-info">

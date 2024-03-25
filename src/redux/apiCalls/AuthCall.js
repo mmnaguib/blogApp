@@ -6,10 +6,10 @@ export function registerUser(user) {
   return async (dispatch) => {
     try {
       const { data } = await request.post("/api/auth/register", user);
-      dispatch(authActions.register(data.Message));
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      dispatch(authActions.register(data.message));
+      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      toast.error(error.response.data.Message);
+      toast.error(error.response.data);
     }
   };
 }
@@ -21,7 +21,6 @@ export function loginUser(user) {
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       toast.error(error.response.data.Message);
-      console.log(error.response.data.Message);
     }
   };
 }
@@ -30,5 +29,17 @@ export function logout() {
   return async (dispatch) => {
     dispatch(authActions.logout());
     localStorage.removeItem("userInfo");
+  };
+}
+
+// Verify Email
+export function verifyEmail(userId, token) {
+  return async (dispatch) => {
+    try {
+      await request.get(`/api/auth/${userId}/verify/${token}`);
+      dispatch(authActions.setIsEmailVerification());
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

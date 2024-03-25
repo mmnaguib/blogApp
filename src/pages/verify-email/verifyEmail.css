@@ -1,0 +1,33 @@
+.verify-email {
+    height: calc(100vh - 130px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.verfiy-email-icon {
+    font-size: 80px;
+    color: var(--green-color);
+}
+
+.verfiy-email-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: var(--green-color);
+}
+
+.verfiy-email-link {
+    font-weight: 600;
+    font-size: 24px;
+    padding: 5px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--white-color);
+}
+
+.verfiy-email-notfound {
+    font-size: 40px;
+    color: var(--red-color);
+}

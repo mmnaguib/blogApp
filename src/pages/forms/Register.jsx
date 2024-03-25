@@ -22,16 +22,9 @@ const Register = () => {
 
     dispatch(registerUser({ username, email, password }));
     if (registerMessage) {
-      swal({
-        title: registerMessage,
-        icon: "success",
-      }).then((isOk) => {
-        if (isOk) {
-          navigate("/login");
-        }
-      });
+      navigate("/login");
+      toast.success(registerMessage);
     }
-    console.log({ username, email, password });
   };
 
   return (
